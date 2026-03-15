@@ -147,6 +147,11 @@
         The demo application lets you interact with every feature of the package in real time — no setup required.
         All emails are captured by the <code>log</code> mail driver so nothing is actually sent.
       </p>
+      <p>
+        For real-world code examples — notifications, mailables, event listeners, controllers, and more —
+        browse the demo app's source code on GitHub:
+        <a href="https://github.com/lchris44/laravel-email-preference-center-demo" target="_blank" rel="noopener">github.com/lchris44/laravel-email-preference-center-demo</a>
+      </p>
 
       <a href="/demo" class="demo-banner">
         <div class="demo-banner-left">
@@ -579,6 +584,27 @@ class MarketingNotification extends Notification implements HasEmailCategory
       <h2>Preference Management</h2>
       <p>All preference methods are available on any model using the <code>HasEmailPreferences</code> trait.</p>
 
+      <h3>Default behaviour — opt-in by default</h3>
+      <p>
+        If a user has <strong>no preference row</strong> for a category, the package treats them as
+        <strong>subscribed with instant frequency</strong>. You do not need to seed rows for new users —
+        they will receive emails from all categories until they explicitly change their preferences.
+      </p>
+      <div class="code-block">
+        <div class="code-header"><span>PHP</span><button class="copy-btn" data-target="pref-default">Copy</button></div>
+        <pre id="pref-default"><code class="lang-php">// User has no preference row for 'marketing'
+$user->prefersEmail('marketing');   // true  — opt-in by default
+$user->emailFrequency('marketing'); // 'instant' — default frequency</code></pre>
+      </div>
+
+      <div class="callout callout-tip">
+        <strong>GDPR note:</strong> The implicit default is not recorded in the consent log.
+        <code>wasSubscribedTo()</code> returns <code>false</code> if there is no log entry for a user,
+        even though they are treated as subscribed at runtime. If explicit consent is required for your use case,
+        seed preference rows for new users on registration and call <code>$user->subscribe()</code> to create an
+        audit trail.
+      </div>
+
       <h3>Read preferences</h3>
       <div class="code-block">
         <div class="code-header"><span>PHP</span><button class="copy-btn" data-target="pref-read">Copy</button></div>
@@ -762,9 +788,44 @@ $unsubscribeUrl = URL::temporarySignedRoute(
       <h2>Digest Batching</h2>
       <p>
         When a user's frequency is set to <code>daily</code> or <code>weekly</code>, notifications are not sent immediately.
-        Instead, they are queued to the <code>pending_digest_items</code> table. The scheduler then batches and sends
-        them as a single digest email at the configured time.
+        Instead, the channel serializes the <code>toMail()</code> payload from your notification and stores it as a row
+        in the <code>pending_digest_items</code> table. The scheduler then collects all pending items for each user,
+        passes them as a collection to <code>DigestMail</code>, and delivers a single batched email at the configured time.
       </p>
+
+      <h3>How the pipeline works</h3>
+      <p>Take this notification as an example:</p>
+      <div class="code-block">
+        <div class="code-header"><span>app/Notifications/OrderShippedNotification.php</span><button class="copy-btn" data-target="digest-how-1">Copy</button></div>
+        <pre id="digest-how-1"><code class="lang-php">#[EmailCategory('digest')]
+class OrderShippedNotification extends Notification
+{
+    public function via(object $notifiable): array
+    {
+        return ['email-preferences'];
+    }
+
+    public function toMail(object $notifiable): MailMessage
+    {
+        return (new MailMessage)
+            ->subject('Your order has shipped')
+            ->line('Order #1234 is on its way.')
+            ->action('Track order', url('/orders/1234'));
+    }
+}</code></pre>
+      </div>
+
+      <p>
+        If the user's frequency for <code>digest</code> is <code>daily</code>, calling
+        <code>$user->notify(new OrderShippedNotification())</code> will <strong>not</strong> send an email.
+        Instead, the channel stores the <code>toMail()</code> content — subject, lines, action button — as a JSON
+        payload in <code>pending_digest_items</code>. At 08:00 the next morning the scheduler picks up all pending
+        items for that user and delivers them as one digest email.
+      </p>
+
+      <div class="callout callout-info">
+        <strong>You never call <code>DigestQueue</code> yourself when using the notification channel</strong> — it is invoked automatically inside the channel. <code>DigestQueue::dispatch()</code> is only needed when you want to push items into the digest pipeline from outside a notification, for example from a queued job or an event listener (see the manual dispatch example below).
+      </div>
 
       <h3>Automatic scheduling</h3>
       <p>
