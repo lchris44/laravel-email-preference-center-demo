@@ -317,11 +317,12 @@ class User extends Authenticatable
       </div>
 
       <h3>Seed initial preferences <span class="badge">optional</span></h3>
-      <p>Run the built-in seeder to create default preference rows for all existing users:</p>
+      <p>If you are installing the package on an existing app with users already in the database, run the seeder to create default preference rows for everyone upfront:</p>
       <div class="code-block">
         <div class="code-header"><span>Terminal</span><button class="copy-btn" data-target="install-5">Copy</button></div>
         <pre id="install-5"><code class="lang-bash">php artisan email-preferences:seed</code></pre>
       </div>
+      <p>It is also useful when adding a new category to an existing app — re-run it and only the missing rows will be created. See <a href="#artisan-commands">Artisan Commands</a> for the full options reference.</p>
     </section>
 
     <hr class="divider" />
@@ -987,10 +988,55 @@ php artisan email-preferences:send-digests weekly</code></pre>
       </div>
 
       <h3><code>email-preferences:seed</code></h3>
-      <p>Create default preference rows for every notifiable model that doesn't have them yet. Safe to run multiple times.</p>
+      <p>Creates default preference rows for every notifiable model that doesn't have them yet. Safe to run multiple times — existing rows are skipped unless <code>--force</code> is passed.</p>
+
+      <h4>When to use it</h4>
+      <div class="demo-feature-list" style="margin-top:10px;">
+        <div class="demo-feature">
+          <div class="demo-feature-icon">🚀</div>
+          <div>
+            <strong>Installing on an existing app</strong>
+            <p>You already have thousands of users. Without seeding, preference rows are created on the fly the first time each user is encountered. Running the seeder upfront gives every user explicit rows from day one, making queries and reporting predictable.</p>
+          </div>
+        </div>
+        <div class="demo-feature">
+          <div class="demo-feature-icon">➕</div>
+          <div>
+            <strong>Adding a new category after launch</strong>
+            <p>You add an <code>announcements</code> category six months in. Existing users have rows for the old categories but nothing for the new one. The seeder fills in only the missing rows, so no user is left out of the new category.</p>
+          </div>
+        </div>
+        <div class="demo-feature">
+          <div class="demo-feature-icon">🔄</div>
+          <div>
+            <strong>Resetting preferences to defaults</strong>
+            <p>With <code>--force</code>, it overwrites existing rows and resets everyone to the default frequency. Useful during development, after a botched migration, or when changing your default frequency strategy.</p>
+          </div>
+        </div>
+      </div>
+
       <div class="code-block">
         <div class="code-header"><span>Terminal</span><button class="copy-btn" data-target="cmd-2">Copy</button></div>
-        <pre id="cmd-2"><code class="lang-bash">php artisan email-preferences:seed</code></pre>
+        <pre id="cmd-2"><code class="lang-bash"># Normal use — skips rows that already exist
+php artisan email-preferences:seed
+
+# Target a specific model (defaults to App\Models\User)
+php artisan email-preferences:seed --model=App\\Models\\Organization
+
+# Reset everyone to weekly digest
+php artisan email-preferences:seed --frequency=weekly --force</code></pre>
+      </div>
+
+      <h4>Options</h4>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Option</th><th>Default</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>--model</code></td><td><code>App\Models\User</code></td><td>Fully-qualified notifiable model class to seed</td></tr>
+            <tr><td><code>--frequency</code></td><td><code>instant</code></td><td>Default frequency for frequency-controlled categories</td></tr>
+            <tr><td><code>--force</code></td><td>—</td><td>Overwrite preference rows that already exist</td></tr>
+          </tbody>
+        </table>
       </div>
     </section>
 
