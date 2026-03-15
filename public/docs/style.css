@@ -238,6 +238,12 @@ a:hover { text-decoration: underline; }
    ============================================================ */
 .hero { padding-bottom: 8px; }
 
+.hero-logo {
+  width: 160px;
+  display: block;
+  margin-bottom: 20px;
+}
+
 .hero-badge {
   display: inline-flex;
   align-items: center;
