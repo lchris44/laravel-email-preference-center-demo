@@ -662,16 +662,9 @@ $user->emailPreferences()
       <h3>Generate a preference center URL</h3>
       <div class="code-block">
         <div class="code-header"><span>PHP</span><button class="copy-btn" data-target="pc-url">Copy</button></div>
-        <pre id="pc-url"><code class="lang-php">use Illuminate\Support\Facades\URL;
+        <pre id="pc-url"><code class="lang-php">use Lchris44\EmailPreferenceCenter\Support\SignedUnsubscribeUrl;
 
-$url = URL::temporarySignedRoute(
-    'email-preferences.center',
-    now()->addDays(30),
-    [
-        'notifiable_type' => get_class($user),
-        'notifiable_id'   => $user->id,
-    ]
-);
+$url = SignedUnsubscribeUrl::generateForCenter($user);
 
 // Include this URL in your emails
 return (new MailMessage)
@@ -767,17 +760,9 @@ class NewsletterMail extends Mailable
       <h3>Generate an unsubscribe URL manually</h3>
       <div class="code-block">
         <div class="code-header"><span>PHP</span><button class="copy-btn" data-target="unsub-manual">Copy</button></div>
-        <pre id="unsub-manual"><code class="lang-php">use Illuminate\Support\Facades\URL;
+        <pre id="unsub-manual"><code class="lang-php">use Lchris44\EmailPreferenceCenter\Support\SignedUnsubscribeUrl;
 
-$unsubscribeUrl = URL::temporarySignedRoute(
-    'email-preferences.unsubscribe',
-    now()->addDays(30),
-    [
-        'notifiable_type' => get_class($user),
-        'notifiable_id'   => $user->id,
-        'category'        => 'marketing',
-    ]
-);</code></pre>
+$unsubscribeUrl = SignedUnsubscribeUrl::generate($user, 'marketing');</code></pre>
       </div>
     </section>
 
