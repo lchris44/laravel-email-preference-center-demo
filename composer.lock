@@ -1463,16 +1463,16 @@
         },
         {
             "name": "lchris44/laravel-email-preference-center",
-            "version": "v1.2.0",
+            "version": "v1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lchris44/laravel-email-preference-center.git",
-                "reference": "4b0bf94e4e47e977562cd4df0783aaef5ff20afc"
+                "reference": "d8b6ca4f1eaeb66a74951e1c067a3ff570963af7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lchris44/laravel-email-preference-center/zipball/4b0bf94e4e47e977562cd4df0783aaef5ff20afc",
-                "reference": "4b0bf94e4e47e977562cd4df0783aaef5ff20afc",
+                "url": "https://api.github.com/repos/lchris44/laravel-email-preference-center/zipball/d8b6ca4f1eaeb66a74951e1c067a3ff570963af7",
+                "reference": "d8b6ca4f1eaeb66a74951e1c067a3ff570963af7",
                 "shasum": ""
             },
             "require": {
@@ -1523,9 +1523,9 @@
             ],
             "support": {
                 "issues": "https://github.com/lchris44/laravel-email-preference-center/issues",
-                "source": "https://github.com/lchris44/laravel-email-preference-center/tree/v1.2.0"
+                "source": "https://github.com/lchris44/laravel-email-preference-center/tree/v1.2.1"
             },
-            "time": "2026-03-14T22:36:27+00:00"
+            "time": "2026-03-15T21:41:36+00:00"
         },
         {
             "name": "league/commonmark",
