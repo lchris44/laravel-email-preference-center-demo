@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laravel Email Preference Center — Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/docs/style.css" />
+</head>
+<body>
+
+<!-- Top nav bar -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="#" class="topbar-logo">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect width="24" height="24" rx="6" fill="#F05340"/>
+        <path d="M6 17l3-8 3 4 2-2.5L17 17H6Z" fill="white" stroke="white" stroke-width="0.5" stroke-linejoin="round"/>
+      </svg>
+      <span>Email Preference Center</span>
+    </a>
+    <nav class="topbar-links">
+      <a href="#installation">Install</a>
+      <a href="#live-demo" class="demo-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Live Demo
+      </a>
+      <a href="#api-reference">API</a>
+      <a href="https://github.com/lchris44/laravel-email-preference-center" target="_blank" rel="noopener" class="github-link">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z"/></svg>
+        <span>GitHub</span>
+      </a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" title="Toggle menu" aria-label="Open navigation menu" aria-expanded="false">
+      <svg class="icon-menu" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <svg class="icon-close" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <button class="theme-toggle" id="themeToggle" title="Toggle dark mode" aria-label="Toggle dark mode">
+      <svg class="sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      <svg class="moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="drawer-overlay" id="drawerOverlay"></div>
+
+<div class="layout">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <nav class="sidebar-nav">
+      <div class="nav-group">
+        <a href="/demo" class="nav-demo-btn">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Open Live Demo
+        </a>
+      </div>
+      <div class="nav-group">
+        <span class="nav-group-title">Getting Started</span>
+        <a href="#introduction" class="nav-link">Introduction</a>
+        <a href="#live-demo" class="nav-link">Live Demo</a>
+        <a href="#installation" class="nav-link">Installation</a>
+        <a href="#quick-start" class="nav-link">Quick Start</a>
+        <a href="#configuration" class="nav-link">Configuration</a>
+      </div>
+      <div class="nav-group">
+        <span class="nav-group-title">Core Features</span>
+        <a href="#notification-channel" class="nav-link">Notification Channel</a>
+        <a href="#category-declaration" class="nav-link">Category Declaration</a>
+        <a href="#preference-management" class="nav-link">Preference Management</a>
+        <a href="#preference-center" class="nav-link">Preference Center UI</a>
+        <a href="#unsubscribe" class="nav-link">One-Click Unsubscribe</a>
+        <a href="#digest-batching" class="nav-link">Digest Batching</a>
+        <a href="#gdpr-consent" class="nav-link">GDPR Consent Log</a>
+        <a href="#events" class="nav-link">Events</a>
+      </div>
+      <div class="nav-group">
+        <span class="nav-group-title">Reference</span>
+        <a href="#artisan-commands" class="nav-link">Artisan Commands</a>
+        <a href="#api-reference" class="nav-link">API Reference</a>
+        <a href="#database-schema" class="nav-link">Database Schema</a>
+        <a href="#routes-reference" class="nav-link">Routes</a>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- Main content -->
+  <main class="content">
+
+    <!-- Hero -->
+    <section class="hero" id="introduction">
+      <div class="hero-badge">Laravel Package · v1.2</div>
+      <h1 class="hero-title">Laravel Email Preference Center</h1>
+      <p class="hero-lead">
+        A complete, drop-in email preference management system for Laravel. Give your users full control over which emails they receive and how often — with one-click unsubscribe, GDPR-compliant audit logs, and digest batching out of the box.
+      </p>
+      <div class="hero-actions">
+        <a href="#installation" class="btn btn-primary">Get Started →</a>
+        <a href="#quick-start" class="btn btn-secondary">Quick Start</a>
+        <a href="/demo" class="btn btn-demo">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Live Demo
+        </a>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">📬</div>
+          <h3>Smart Routing</h3>
+          <p>Custom notification channel that automatically routes emails based on each user's preferences — silent drops for unsubscribed users.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔗</div>
+          <h3>One-Click Unsubscribe</h3>
+          <p>RFC 8058 compliant <code>List-Unsubscribe</code> headers for Gmail and Yahoo 2024 sender requirements.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎛️</div>
+          <h3>Preference Center</h3>
+          <p>Self-service UI accessible via signed URLs — no login required. Users manage all categories in one place.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📋</div>
+          <h3>Digest Batching</h3>
+          <p>Automatic daily and weekly digest batching. Queue items and let the scheduler handle delivery.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔒</div>
+          <h3>GDPR Consent Log</h3>
+          <p>Immutable audit trail with IP address, user agent, and timestamp for every preference change.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🧩</div>
+          <h3>Polymorphic</h3>
+          <p>Works with any notifiable model, not just <code>User</code>. One trait to rule them all.</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- Live Demo -->
+    <section id="live-demo">
+      <h2>Live Demo</h2>
+      <p>
+        The demo application lets you interact with every feature of the package in real time — no setup required.
+        All emails are captured by the <code>log</code> mail driver so nothing is actually sent.
+      </p>
+
+      <a href="/demo" class="demo-banner">
+        <div class="demo-banner-left">
+          <div class="demo-banner-badge">Live</div>
+          <div>
+            <div class="demo-banner-title">Demo</div>
+            <div class="demo-banner-sub">Interactive dashboard · Real package · Log mail driver</div>
+          </div>
+        </div>
+        <div class="demo-banner-arrow">Open →</div>
+      </a>
+
+      <h3>Pre-seeded users</h3>
+      <p>Three users are seeded with different preference configurations so you can test every scenario immediately:</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>User</th><th>Email</th><th>Marketing</th><th>Security</th><th>Digest Frequency</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Alice</strong></td>
+              <td><code>alice@example.com</code></td>
+              <td><span class="status-dot dot-green"></span> Subscribed</td>
+              <td><span class="status-dot dot-green"></span> Required</td>
+              <td><code>instant</code></td>
+            </tr>
+            <tr>
+              <td><strong>Bob</strong></td>
+              <td><code>bob@example.com</code></td>
+              <td><span class="status-dot dot-red"></span> Unsubscribed</td>
+              <td><span class="status-dot dot-green"></span> Required</td>
+              <td><code>daily</code></td>
+            </tr>
+            <tr>
+              <td><strong>Carol</strong></td>
+              <td><code>carol@example.com</code></td>
+              <td><span class="status-dot dot-green"></span> Subscribed</td>
+              <td><span class="status-dot dot-green"></span> Required</td>
+              <td><code>weekly</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>What you can try</h3>
+      <div class="demo-feature-list">
+        <div class="demo-feature">
+          <div class="demo-feature-icon">📬</div>
+          <div>
+            <strong>Notification Channel</strong>
+            <p>Fire marketing, security, digest, and billing notifications for any user. Notice how Bob's marketing notification is silently dropped, Carol's digest item is queued instead of sent, and Alice receives hers immediately.</p>
+          </div>
+        </div>
+        <div class="demo-feature">
+          <div class="demo-feature-icon">🔗</div>
+          <div>
+            <strong>Newsletter Mailable + RFC 8058</strong>
+            <p>Send a newsletter mailable and inspect the <code>List-Unsubscribe</code> and <code>List-Unsubscribe-Post</code> headers in the mail log.</p>
+          </div>
+        </div>
+        <div class="demo-feature">
+          <div class="demo-feature-icon">🎛️</div>
+          <div>
+            <strong>Preference Center</strong>
+            <p>Each user card on the dashboard has a signed link to their personal preference center — manage categories and frequencies with no login.</p>
+          </div>
+        </div>
+        <div class="demo-feature">
+          <div class="demo-feature-icon">📋</div>
+          <div>
+            <strong>Digest Pipeline</strong>
+            <p>Dispatch digest items directly with <em>Digest notify</em> or <em>Dispatch digest item</em>, then trigger <em>Send daily digests</em> to batch and deliver them.</p>
+          </div>
+        </div>
+        <div class="demo-feature">
+          <div class="demo-feature-icon">🔒</div>
+          <div>
+            <strong>GDPR Consent Log</strong>
+            <p>Subscribe/unsubscribe users and watch the event feed update in real time. Every action is written to the immutable audit log with IP and timestamp.</p>
+          </div>
+        </div>
+        <div class="demo-feature">
+          <div class="demo-feature-icon">📡</div>
+          <div>
+            <strong>Event Feed</strong>
+            <p>The dashboard shows a live feed of all package events (<code>PreferenceUpdated</code>, <code>DigestQueued</code>, <code>DigestSent</code>, etc.) as they fire.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>Mail log</h3>
+      <p>
+        All emails are written to <code>storage/logs/mail.log</code>. The dashboard shows the last 20 entries so you
+        can inspect headers, subjects, and body content without a real mail server.
+      </p>
+      <div class="callout callout-info">
+        To reset the demo to a clean state, run <code>php artisan migrate:fresh --seed</code> in the project root.
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- Installation -->
+    <section id="installation">
+      <h2>Installation</h2>
+      <p>Install the package via Composer:</p>
+      <div class="code-block">
+        <div class="code-header"><span>Terminal</span><button class="copy-btn" data-target="install-1">Copy</button></div>
+        <pre id="install-1"><code class="lang-bash">composer require lchris44/laravel-email-preference-center</code></pre>
+      </div>
+
+      <h3>Publish config &amp; run migrations</h3>
+      <div class="code-block">
+        <div class="code-header"><span>Terminal</span><button class="copy-btn" data-target="install-2">Copy</button></div>
+        <pre id="install-2"><code class="lang-bash">php artisan vendor:publish --tag=email-preferences-config
+php artisan migrate</code></pre>
+      </div>
+
+      <div class="callout callout-info">
+        <strong>Auto-Discovery</strong> — No manual service provider registration is needed. Laravel's package auto-discovery registers everything automatically.
+      </div>
+
+      <h3>Add the trait to your model</h3>
+      <p>Add <code>HasEmailPreferences</code> to any notifiable model (typically <code>User</code>):</p>
+      <div class="code-block">
+        <div class="code-header"><span>app/Models/User.php</span><button class="copy-btn" data-target="install-3">Copy</button></div>
+        <pre id="install-3"><code class="lang-php">&lt;?php
+
+namespace App\Models;
+
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Lchris44\EmailPreferenceCenter\Traits\HasEmailPreferences;
+
+class User extends Authenticatable
+{
+    use HasEmailPreferences;
+}</code></pre>
+      </div>
+
+      <h3>Define your categories</h3>
+      <p>Open <code>config/email-preferences.php</code> and define the email categories your application uses:</p>
+      <div class="code-block">
+        <div class="code-header"><span>config/email-preferences.php</span><button class="copy-btn" data-target="install-4">Copy</button></div>
+        <pre id="install-4"><code class="lang-php">'categories' => [
+    'security' => [
+        'label'       => 'Security Alerts',
+        'description' => 'Password changes, login alerts, and account activity.',
+        'required'    => true,   // Users cannot unsubscribe from required categories
+    ],
+    'marketing' => [
+        'label'       => 'Marketing Emails',
+        'description' => 'Product updates, promotions, and newsletters.',
+        'required'    => false,
+    ],
+    'digest' => [
+        'label'       => 'Activity Digest',
+        'description' => 'A summary of your recent activity.',
+        'required'    => false,
+        'frequency'   => ['instant', 'daily', 'weekly', 'never'],
+    ],
+],</code></pre>
+      </div>
+
+      <h3>Seed initial preferences <span class="badge">optional</span></h3>
+      <p>Run the built-in seeder to create default preference rows for all existing users:</p>
+      <div class="code-block">
+        <div class="code-header"><span>Terminal</span><button class="copy-btn" data-target="install-5">Copy</button></div>
+        <pre id="install-5"><code class="lang-bash">php artisan email-preferences:seed</code></pre>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- Quick Start -->
+    <section id="quick-start">
+      <h2>Quick Start</h2>
+      <p>Once installed, update your notifications to use the <code>email-preferences</code> channel instead of <code>mail</code>.</p>
+
+      <div class="code-block">
+        <div class="code-header"><span>app/Notifications/NewsletterNotification.php</span><button class="copy-btn" data-target="qs-1">Copy</button></div>
+        <pre id="qs-1"><code class="lang-php">&lt;?php
+
+namespace App\Notifications;
+
+use Illuminate\Notifications\Notification;
+use Illuminate\Notifications\Messages\MailMessage;
+use Lchris44\EmailPreferenceCenter\Attributes\EmailCategory;
+
+#[EmailCategory('marketing')]
+class NewsletterNotification extends Notification
+{
+    public function via(object $notifiable): array
+    {
+        return ['email-preferences'];  // ← replaces 'mail'
+    }
+
+    public function toMail(object $notifiable): MailMessage
+    {
+        return (new MailMessage)
+            ->subject('Your Weekly Newsletter')
+            ->line('Here is what\'s new this week...');
+    }
+}</code></pre>
+      </div>
+
+      <p>That's it. The channel will automatically:</p>
+      <ul>
+        <li>Check if the user is subscribed to the <code>marketing</code> category</li>
+        <li>Respect their frequency preference (instant, daily, weekly, never)</li>
+        <li>Queue the notification to the digest pipeline if needed</li>
+        <li>Silently drop the notification if the user has unsubscribed</li>
+      </ul>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- Configuration -->
+    <section id="configuration">
+      <h2>Configuration</h2>
+      <p>All configuration lives in <code>config/email-preferences.php</code>. Here is the full reference:</p>
+
+      <div class="code-block">
+        <div class="code-header"><span>config/email-preferences.php</span><button class="copy-btn" data-target="config-full">Copy</button></div>
+        <pre id="config-full"><code class="lang-php">return [
+
+    /*
+    |----------------------------------------------------------------------
+    | Email Categories
+    |----------------------------------------------------------------------
+    | Define your application's email categories. Each category can be
+    | toggled on/off and can optionally support frequency control.
+    */
+    'categories' => [
+        'security' => [
+            'label'       => 'Security Alerts',
+            'description' => 'Password changes, login alerts, and account activity.',
+            'required'    => true,
+        ],
+        'marketing' => [
+            'label'       => 'Marketing Emails',
+            'description' => 'Product updates, promotions, and newsletters.',
+            'required'    => false,
+            'frequency'   => ['instant', 'daily', 'weekly', 'never'],
+        ],
+    ],
+
+    /*
+    |----------------------------------------------------------------------
+    | Table Names
+    |----------------------------------------------------------------------
+    */
+    'table_names' => [
+        'preferences' => 'email_preferences',
+        'logs'        => 'email_preference_logs',
+    ],
+
+    /*
+    |----------------------------------------------------------------------
+    | Auto Scheduling
+    |----------------------------------------------------------------------
+    | Automatically register digest schedule commands. Set to false if
+    | you want to register the schedules yourself.
+    */
+    'auto_schedule' => env('EMAIL_PREFERENCES_AUTO_SCHEDULE', true),
+
+    /*
+    |----------------------------------------------------------------------
+    | Digest Schedules (Cron expressions)
+    |----------------------------------------------------------------------
+    */
+    'digest_schedules' => [
+        'daily'  => env('EMAIL_PREFERENCES_DAILY_SCHEDULE', '0 8 * * *'),   // 08:00 daily
+        'weekly' => env('EMAIL_PREFERENCES_WEEKLY_SCHEDULE', '0 8 * * 1'),  // 08:00 Monday
+    ],
+
+    /*
+    |----------------------------------------------------------------------
+    | Signed URL Expiry
+    |----------------------------------------------------------------------
+    */
+    'signed_url_expiry_days' => env('EMAIL_PREFERENCES_URL_EXPIRY_DAYS', 30),
+
+    /*
+    |----------------------------------------------------------------------
+    | Digest Mailable
+    |----------------------------------------------------------------------
+    | The mailable used to send digest emails. Must accept:
+    | (mixed $notifiable, Collection $items, string $frequency)
+    */
+    'digest_mailable' => \Lchris44\EmailPreferenceCenter\Mail\DigestMail::class,
+
+    /*
+    |----------------------------------------------------------------------
+    | Digest Queue
+    |----------------------------------------------------------------------
+    | Set a queue name to dispatch digests asynchronously, or null for sync.
+    */
+    'digest_queue' => env('EMAIL_PREFERENCES_DIGEST_QUEUE', null),
+
+    /*
+    |----------------------------------------------------------------------
+    | Notification Category Map
+    |----------------------------------------------------------------------
+    | Map third-party notification classes to categories when you cannot
+    | add a PHP attribute or implement the interface yourself.
+    */
+    'notification_categories' => [
+        // \Vendor\BillingNotification::class => 'billing',
+    ],
+
+];
+</code></pre>
+      </div>
+
+      <h3>Environment variables</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Variable</th><th>Default</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>EMAIL_PREFERENCES_AUTO_SCHEDULE</code></td><td><code>true</code></td><td>Auto-register digest schedules</td></tr>
+            <tr><td><code>EMAIL_PREFERENCES_DAILY_SCHEDULE</code></td><td><code>0 8 * * *</code></td><td>Daily digest cron expression</td></tr>
+            <tr><td><code>EMAIL_PREFERENCES_WEEKLY_SCHEDULE</code></td><td><code>0 8 * * 1</code></td><td>Weekly digest cron expression</td></tr>
+            <tr><td><code>EMAIL_PREFERENCES_URL_EXPIRY_DAYS</code></td><td><code>30</code></td><td>Signed URL expiry in days</td></tr>
+            <tr><td><code>EMAIL_PREFERENCES_DIGEST_QUEUE</code></td><td><code>null</code></td><td>Queue name for async digests</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- Notification Channel -->
+    <section id="notification-channel">
+      <h2>Notification Channel</h2>
+      <p>
+        The <code>email-preferences</code> channel is a drop-in replacement for Laravel's built-in <code>mail</code> channel.
+        It intercepts the notification, checks the recipient's preferences, and decides whether to send immediately,
+        queue to a digest, or silently drop the notification.
+      </p>
+
+      <h3>How routing works</h3>
+      <div class="flow-diagram">
+        <div class="flow-step">Notification dispatched via <code>email-preferences</code></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">Look up user's preference for the notification's category</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-row">
+          <div class="flow-branch">
+            <div class="flow-condition">unsubscribed<br/><small>or "never"</small></div>
+            <div class="flow-result result-drop">Silent drop</div>
+          </div>
+          <div class="flow-branch">
+            <div class="flow-condition">instant</div>
+            <div class="flow-result result-send">Send immediately</div>
+          </div>
+          <div class="flow-branch">
+            <div class="flow-condition">daily</div>
+            <div class="flow-result result-queue">Queue to daily digest</div>
+          </div>
+          <div class="flow-branch">
+            <div class="flow-condition">weekly</div>
+            <div class="flow-result result-queue">Queue to weekly digest</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-block">
+        <div class="code-header"><span>app/Notifications/OrderShippedNotification.php</span><button class="copy-btn" data-target="channel-1">Copy</button></div>
+        <pre id="channel-1"><code class="lang-php">public function via(object $notifiable): array
+{
+    // Use 'email-preferences' instead of 'mail'
+    return ['email-preferences', 'database'];
+}</code></pre>
+      </div>
+
+      <div class="callout callout-tip">
+        <strong>Tip:</strong> You can combine <code>email-preferences</code> with other channels. The preference check only applies to the email channel — other channels like <code>database</code> or <code>slack</code> are unaffected.
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- Category Declaration -->
+    <section id="category-declaration">
+      <h2>Category Declaration</h2>
+      <p>Every notification that uses the <code>email-preferences</code> channel must declare its category. There are three ways to do this:</p>
+
+      <h3>Method 1 — PHP Attribute <span class="badge badge-recommended">Recommended</span></h3>
+      <div class="code-block">
+        <div class="code-header"><span>Notification class</span><button class="copy-btn" data-target="cat-1">Copy</button></div>
+        <pre id="cat-1"><code class="lang-php">use Lchris44\EmailPreferenceCenter\Attributes\EmailCategory;
+
+#[EmailCategory('marketing')]
+class NewsletterNotification extends Notification
+{
+    // ...
+}</code></pre>
+      </div>
+
+      <h3>Method 2 — Interface</h3>
+      <div class="code-block">
+        <div class="code-header"><span>Notification class</span><button class="copy-btn" data-target="cat-2">Copy</button></div>
+        <pre id="cat-2"><code class="lang-php">use Lchris44\EmailPreferenceCenter\Contracts\HasEmailCategory;
+
+class MarketingNotification extends Notification implements HasEmailCategory
+{
+    public function emailCategory(): string
+    {
+        return 'marketing';
+    }
+}</code></pre>
+      </div>
+
+      <h3>Method 3 — Config Map</h3>
+      <p>For third-party notifications you cannot modify, map them in the config file:</p>
+      <div class="code-block">
+        <div class="code-header"><span>config/email-preferences.php</span><button class="copy-btn" data-target="cat-3">Copy</button></div>
+        <pre id="cat-3"><code class="lang-php">'notification_categories' => [
+    \Vendor\Package\BillingNotification::class => 'billing',
+    \Vendor\Package\ReceiptNotification::class => 'billing',
+],</code></pre>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- Preference Management -->
+    <section id="preference-management">
+      <h2>Preference Management</h2>
+      <p>All preference methods are available on any model using the <code>HasEmailPreferences</code> trait.</p>
+
+      <h3>Read preferences</h3>
+      <div class="code-block">
+        <div class="code-header"><span>PHP</span><button class="copy-btn" data-target="pref-read">Copy</button></div>
+        <pre id="pref-read"><code class="lang-php">// Check if a user wants emails in a category
+$user->prefersEmail('marketing');  // bool
+
+// Get current frequency setting
+$user->emailFrequency('digest');  // 'instant' | 'daily' | 'weekly' | 'never'</code></pre>
+      </div>
+
+      <h3>Update preferences</h3>
+      <div class="code-block">
+        <div class="code-header"><span>PHP</span><button class="copy-btn" data-target="pref-write">Copy</button></div>
+        <pre id="pref-write"><code class="lang-php">// Subscribe a user to a category
+$user->subscribe('marketing', 'admin');
+
+// Unsubscribe a user from a category
+$user->unsubscribe('marketing', 'api');
+
+// Set digest frequency
+$user->setEmailFrequency('digest', 'weekly', 'preference_center');
+// Frequency options: 'instant' | 'daily' | 'weekly' | 'never'</code></pre>
+      </div>
+
+      <div class="callout callout-info">
+        The second argument to <code>subscribe()</code>, <code>unsubscribe()</code>, and <code>setEmailFrequency()</code> is the <em>via</em> source, used for the GDPR audit log. Common values: <code>api</code>, <code>admin</code>, <code>preference_center</code>, <code>unsubscribe_link</code>.
+      </div>
+
+      <h3>Query the Eloquent relationships</h3>
+      <div class="code-block">
+        <div class="code-header"><span>PHP</span><button class="copy-btn" data-target="pref-relations">Copy</button></div>
+        <pre id="pref-relations"><code class="lang-php">// Get all preferences for a user
+$user->emailPreferences;
+
+// Get the audit log
+$user->emailPreferenceLogs;
+
+// Query a specific preference
+$user->emailPreferences()
+    ->where('category', 'marketing')
+    ->first();</code></pre>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- Preference Center -->
+    <section id="preference-center">
+      <h2>Preference Center UI</h2>
+      <p>
+        The package ships with a self-service preference center that users can access via a signed URL — <strong>no login required</strong>.
+        Users can toggle subscriptions and set frequencies for all their categories in one place.
+      </p>
+
+      <h3>Generate a preference center URL</h3>
+      <div class="code-block">
+        <div class="code-header"><span>PHP</span><button class="copy-btn" data-target="pc-url">Copy</button></div>
+        <pre id="pc-url"><code class="lang-php">use Illuminate\Support\Facades\URL;
+
+$url = URL::temporarySignedRoute(
+    'email-preferences.center',
+    now()->addDays(30),
+    [
+        'notifiable_type' => get_class($user),
+        'notifiable_id'   => $user->id,
+    ]
+);
+
+// Include this URL in your emails
+return (new MailMessage)
+    ->line('Manage your email preferences:')
+    ->action('Email Preferences', $url);</code></pre>
+      </div>
+
+      <h3>Include in a Mailable</h3>
+      <div class="code-block">
+        <div class="code-header"><span>Blade template</span><button class="copy-btn" data-target="pc-blade">Copy</button></div>
+        <pre id="pc-blade"><code class="lang-html">&lt;!-- In any email template --&gt;
+&lt;a href="{{ $preferenceCenterUrl }}"&gt;
+    Manage email preferences
+&lt;/a&gt;</code></pre>
+      </div>
+
+      <h3>Customize the view</h3>
+      <p>Publish the package views to customize the preference center UI:</p>
+      <div class="code-block">
+        <div class="code-header"><span>Terminal</span><button class="copy-btn" data-target="pc-publish">Copy</button></div>
+        <pre id="pc-publish"><code class="lang-bash">php artisan vendor:publish --tag=email-preferences-views</code></pre>
+      </div>
+      <p>This publishes to <code>resources/views/vendor/email-preferences/</code>.</p>
+
+      <h3>Routes</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Method</th><th>URI</th><th>Route Name</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><span class="method method-get">GET</span></td><td><code>/email-preferences</code></td><td><code>email-preferences.center</code></td><td>Show the preference center form</td></tr>
+            <tr><td><span class="method method-post">POST</span></td><td><code>/email-preferences</code></td><td><code>email-preferences.center.save</code></td><td>Save updated preferences</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- Unsubscribe -->
+    <section id="unsubscribe">
+      <h2>One-Click Unsubscribe</h2>
+      <p>
+        The package supports <strong>RFC 8058 one-click unsubscribe</strong>, which is required by Gmail and Yahoo for bulk senders
+        as of February 2024. When a user clicks "Unsubscribe" directly inside Gmail or Apple Mail, the mail client sends a
+        <code>POST</code> request to the <code>List-Unsubscribe-Post</code> endpoint automatically.
+      </p>
+
+      <h3>Add headers to a Mailable</h3>
+      <p>Use the <code>BelongsToCategory</code> trait on any <code>Mailable</code> to automatically add the headers:</p>
+      <div class="code-block">
+        <div class="code-header"><span>app/Mail/NewsletterMail.php</span><button class="copy-btn" data-target="unsub-1">Copy</button></div>
+        <pre id="unsub-1"><code class="lang-php">&lt;?php
+
+namespace App\Mail;
+
+use Illuminate\Mail\Mailable;
+use Lchris44\EmailPreferenceCenter\Traits\BelongsToCategory;
+
+class NewsletterMail extends Mailable
+{
+    use BelongsToCategory;
+
+    public function __construct(
+        protected $notifiable,
+        protected string $category = 'marketing'
+    ) {}
+
+    public function build()
+    {
+        // BelongsToCategory automatically appends:
+        // List-Unsubscribe: &lt;https://app.test/email-preferences/unsubscribe?...&gt;
+        // List-Unsubscribe-Post: List-Unsubscribe=One-Click
+        return $this->view('emails.newsletter');
+    }
+}</code></pre>
+      </div>
+
+      <h3>Unsubscribe routes</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Method</th><th>URI</th><th>Route Name</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><span class="method method-get">GET</span></td><td><code>/email-preferences/unsubscribe</code></td><td><code>email-preferences.unsubscribe</code></td><td>Show unsubscribe confirmation page</td></tr>
+            <tr><td><span class="method method-post">POST</span></td><td><code>/email-preferences/unsubscribe</code></td><td><code>email-preferences.unsubscribe.post</code></td><td>RFC 8058 one-click unsubscribe endpoint</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout callout-info">
+        All unsubscribe routes use Laravel's <strong>signed URLs</strong>, so they cannot be tampered with or guessed. The signature is validated before any preference change is made.
+      </div>
+
+      <h3>Generate an unsubscribe URL manually</h3>
+      <div class="code-block">
+        <div class="code-header"><span>PHP</span><button class="copy-btn" data-target="unsub-manual">Copy</button></div>
+        <pre id="unsub-manual"><code class="lang-php">use Illuminate\Support\Facades\URL;
+
+$unsubscribeUrl = URL::temporarySignedRoute(
+    'email-preferences.unsubscribe',
+    now()->addDays(30),
+    [
+        'notifiable_type' => get_class($user),
+        'notifiable_id'   => $user->id,
+        'category'        => 'marketing',
+    ]
+);</code></pre>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- Digest Batching -->
+    <section id="digest-batching">
+      <h2>Digest Batching</h2>
+      <p>
+        When a user's frequency is set to <code>daily</code> or <code>weekly</code>, notifications are not sent immediately.
+        Instead, they are queued to the <code>pending_digest_items</code> table. The scheduler then batches and sends
+        them as a single digest email at the configured time.
+      </p>
+
+      <h3>Automatic scheduling</h3>
+      <p>
+        By default (<code>auto_schedule = true</code>), the package registers two scheduled commands automatically:
+      </p>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Frequency</th><th>Default Schedule</th><th>Cron</th></tr></thead>
+          <tbody>
+            <tr><td>Daily</td><td>Every day at 08:00</td><td><code>0 8 * * *</code></td></tr>
+            <tr><td>Weekly</td><td>Monday at 08:00</td><td><code>0 8 * * 1</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Make sure the Laravel scheduler is running:</p>
+      <div class="code-block">
+        <div class="code-header"><span>crontab</span><button class="copy-btn" data-target="digest-cron">Copy</button></div>
+        <pre id="digest-cron"><code class="lang-bash">* * * * * cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1</code></pre>
+      </div>
+
+      <h3>Dispatch a digest item manually</h3>
+      <div class="code-block">
+        <div class="code-header"><span>PHP</span><button class="copy-btn" data-target="digest-dispatch">Copy</button></div>
+        <pre id="digest-dispatch"><code class="lang-php">use Lchris44\EmailPreferenceCenter\Jobs\DigestQueue;
+
+DigestQueue::dispatch(
+    notifiable: $user,
+    category:   'digest',
+    type:       'order_shipped',
+    payload:    [
+        'subject' => 'Your order has shipped',
+        'lines'   => ['Order #1234 is on its way.'],
+    ]
+);</code></pre>
+      </div>
+
+      <h3>Customize the digest mailable</h3>
+      <p>Publish the default digest mailable and view to customize the digest email:</p>
+      <div class="code-block">
+        <div class="code-header"><span>Terminal</span><button class="copy-btn" data-target="digest-publish">Copy</button></div>
+        <pre id="digest-publish"><code class="lang-bash">php artisan vendor:publish --tag=email-preferences-mailable</code></pre>
+      </div>
+      <p>Then point config to your custom class:</p>
+      <div class="code-block">
+        <div class="code-header"><span>config/email-preferences.php</span><button class="copy-btn" data-target="digest-custom">Copy</button></div>
+        <pre id="digest-custom"><code class="lang-php">'digest_mailable' => \App\Mail\MyDigestMail::class,
+// Constructor must accept: ($notifiable, Collection $items, string $frequency)</code></pre>
+      </div>
+
+      <h3>Async digest sending</h3>
+      <p>To send digests via a queue worker instead of synchronously, set a queue name:</p>
+      <div class="code-block">
+        <div class="code-header"><span>.env</span><button class="copy-btn" data-target="digest-queue">Copy</button></div>
+        <pre id="digest-queue"><code class="lang-bash">EMAIL_PREFERENCES_DIGEST_QUEUE=emails</code></pre>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- GDPR -->
+    <section id="gdpr-consent">
+      <h2>GDPR Consent Log</h2>
+      <p>
+        Every preference change is recorded in an <strong>immutable</strong> audit log table (<code>email_preference_logs</code>).
+        The log captures the user's IP address, user agent, timestamp, and the action taken — giving you a complete consent trail.
+      </p>
+
+      <h3>What's logged</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Action</th><th>Triggered by</th></tr></thead>
+          <tbody>
+            <tr><td><code>subscribed</code></td><td><code>$user->subscribe()</code></td></tr>
+            <tr><td><code>unsubscribed</code></td><td><code>$user->unsubscribe()</code> or one-click unsubscribe</td></tr>
+            <tr><td><code>frequency_changed</code></td><td><code>$user->setEmailFrequency()</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Query consent history</h3>
+      <div class="code-block">
+        <div class="code-header"><span>PHP</span><button class="copy-btn" data-target="gdpr-1">Copy</button></div>
+        <pre id="gdpr-1"><code class="lang-php">// Was the user subscribed at a specific point in time?
+$wasSubscribed = $user->wasSubscribedTo('marketing', '2026-01-01');  // bool
+
+// Get the most recent consent record for a category
+$log = $user->lastConsentFor('marketing');
+// $log->action     => 'subscribed'
+// $log->via        => 'preference_center'
+// $log->ip_address => '192.168.1.1'
+// $log->user_agent => 'Mozilla/5.0...'
+// $log->created_at => Carbon instance
+
+// Query all logs directly
+$user->emailPreferenceLogs()
+    ->where('category', 'marketing')
+    ->orderBy('created_at', 'desc')
+    ->get();</code></pre>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- Events -->
+    <section id="events">
+      <h2>Events</h2>
+      <p>The package fires events at each key lifecycle moment. Listen to them in your <code>EventServiceProvider</code> or using Laravel's <code>#[Listen]</code> attribute.</p>
+
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Event</th><th>Fired when</th><th>Payload</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><code>PreferenceUpdated</code></td>
+              <td>Any preference is changed</td>
+              <td><code>$notifiable</code>, <code>$category</code>, <code>$action</code>, <code>$via</code></td>
+            </tr>
+            <tr>
+              <td><code>UserUnsubscribed</code></td>
+              <td>User unsubscribes from a category</td>
+              <td><code>$notifiable</code>, <code>$category</code>, <code>$via</code></td>
+            </tr>
+            <tr>
+              <td><code>DigestQueued</code></td>
+              <td>An item is added to the digest pipeline</td>
+              <td><code>$notifiable</code>, <code>$category</code>, <code>$frequency</code></td>
+            </tr>
+            <tr>
+              <td><code>DigestReadyToSend</code></td>
+              <td>A digest batch is ready to be dispatched</td>
+              <td><code>$frequency</code></td>
+            </tr>
+            <tr>
+              <td><code>DigestSent</code></td>
+              <td>A digest email was sent to a user</td>
+              <td><code>$notifiable</code>, <code>$frequency</code>, <code>$itemCount</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Listening to events</h3>
+      <div class="code-block">
+        <div class="code-header"><span>app/Providers/EventServiceProvider.php</span><button class="copy-btn" data-target="events-1">Copy</button></div>
+        <pre id="events-1"><code class="lang-php">use Lchris44\EmailPreferenceCenter\Events\PreferenceUpdated;
+use Lchris44\EmailPreferenceCenter\Events\UserUnsubscribed;
+
+protected $listen = [
+    PreferenceUpdated::class => [
+        \App\Listeners\SyncPreferencesToCrm::class,
+    ],
+    UserUnsubscribed::class => [
+        \App\Listeners\NotifyMarketingTeam::class,
+    ],
+];</code></pre>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- Artisan Commands -->
+    <section id="artisan-commands">
+      <h2>Artisan Commands</h2>
+
+      <h3><code>email-preferences:send-digests</code></h3>
+      <p>Manually trigger a digest send cycle. Useful for testing or when the scheduler is disabled.</p>
+      <div class="code-block">
+        <div class="code-header"><span>Terminal</span><button class="copy-btn" data-target="cmd-1">Copy</button></div>
+        <pre id="cmd-1"><code class="lang-bash"># Send all queued daily digest items
+php artisan email-preferences:send-digests daily
+
+# Send all queued weekly digest items
+php artisan email-preferences:send-digests weekly</code></pre>
+      </div>
+
+      <h3><code>email-preferences:seed</code></h3>
+      <p>Create default preference rows for every notifiable model that doesn't have them yet. Safe to run multiple times.</p>
+      <div class="code-block">
+        <div class="code-header"><span>Terminal</span><button class="copy-btn" data-target="cmd-2">Copy</button></div>
+        <pre id="cmd-2"><code class="lang-bash">php artisan email-preferences:seed</code></pre>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- API Reference -->
+    <section id="api-reference">
+      <h2>API Reference</h2>
+      <p>Complete method reference for the <code>HasEmailPreferences</code> trait.</p>
+
+      <div class="api-method">
+        <div class="api-signature"><code>prefersEmail(string $category): bool</code></div>
+        <p>Returns <code>true</code> if the user is subscribed and their frequency is not <code>never</code>.</p>
+      </div>
+
+      <div class="api-method">
+        <div class="api-signature"><code>emailFrequency(string $category): string</code></div>
+        <p>Returns the user's current frequency for the given category: <code>'instant'</code>, <code>'daily'</code>, <code>'weekly'</code>, or <code>'never'</code>.</p>
+      </div>
+
+      <div class="api-method">
+        <div class="api-signature"><code>subscribe(string $category, string $via = 'api'): void</code></div>
+        <p>Subscribe the user to a category and log the consent action.</p>
+      </div>
+
+      <div class="api-method">
+        <div class="api-signature"><code>unsubscribe(string $category, string $via = 'api'): void</code></div>
+        <p>Unsubscribe the user from a category and log the action. Has no effect on <code>required</code> categories.</p>
+      </div>
+
+      <div class="api-method">
+        <div class="api-signature"><code>setEmailFrequency(string $category, string $frequency, string $via = 'api'): void</code></div>
+        <p>Set the delivery frequency for a category. Must be one of the values configured for that category's <code>frequency</code> array.</p>
+      </div>
+
+      <div class="api-method">
+        <div class="api-signature"><code>wasSubscribedTo(string $category, string|Carbon $date): bool</code></div>
+        <p>Check whether the user was subscribed to a category at a specific point in time. Queries the immutable audit log.</p>
+      </div>
+
+      <div class="api-method">
+        <div class="api-signature"><code>lastConsentFor(string $category): ?EmailPreferenceLog</code></div>
+        <p>Get the most recent consent log entry for a category. Returns <code>null</code> if no record exists.</p>
+      </div>
+
+      <div class="api-method">
+        <div class="api-signature"><code>emailPreferences(): MorphMany</code></div>
+        <p>Eloquent relationship to all <code>EmailPreference</code> records for this model.</p>
+      </div>
+
+      <div class="api-method">
+        <div class="api-signature"><code>emailPreferenceLogs(): MorphMany</code></div>
+        <p>Eloquent relationship to all <code>EmailPreferenceLog</code> audit records for this model.</p>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- Database Schema -->
+    <section id="database-schema">
+      <h2>Database Schema</h2>
+
+      <h3><code>email_preferences</code></h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Column</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>id</code></td><td>bigint PK</td><td>Auto-increment primary key</td></tr>
+            <tr><td><code>notifiable_type</code></td><td>string</td><td>Polymorphic model class name</td></tr>
+            <tr><td><code>notifiable_id</code></td><td>bigint</td><td>Polymorphic model ID</td></tr>
+            <tr><td><code>category</code></td><td>string</td><td>Category key (e.g. <code>marketing</code>)</td></tr>
+            <tr><td><code>frequency</code></td><td>string</td><td><code>instant</code> | <code>daily</code> | <code>weekly</code> | <code>never</code></td></tr>
+            <tr><td><code>unsubscribed_at</code></td><td>timestamp?</td><td>Set when unsubscribed, null when subscribed</td></tr>
+            <tr><td><code>created_at</code></td><td>timestamp</td><td></td></tr>
+            <tr><td><code>updated_at</code></td><td>timestamp</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Unique index on <code>(notifiable_type, notifiable_id, category)</code>.</p>
+
+      <h3><code>email_preference_logs</code> <span class="badge">Immutable</span></h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Column</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>id</code></td><td>bigint PK</td><td></td></tr>
+            <tr><td><code>notifiable_type</code></td><td>string</td><td>Polymorphic type</td></tr>
+            <tr><td><code>notifiable_id</code></td><td>bigint</td><td>Polymorphic ID</td></tr>
+            <tr><td><code>category</code></td><td>string</td><td>Category key</td></tr>
+            <tr><td><code>action</code></td><td>string</td><td><code>subscribed</code> | <code>unsubscribed</code> | <code>frequency_changed</code></td></tr>
+            <tr><td><code>via</code></td><td>string</td><td>Source of the change (e.g. <code>api</code>, <code>preference_center</code>)</td></tr>
+            <tr><td><code>ip_address</code></td><td>string?</td><td>Up to 45 chars (supports IPv6)</td></tr>
+            <tr><td><code>user_agent</code></td><td>text?</td><td>Browser/client user agent string</td></tr>
+            <tr><td><code>created_at</code></td><td>timestamp</td><td>Indexed. No <code>updated_at</code> — rows are never modified.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3><code>pending_digest_items</code></h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Column</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>id</code></td><td>bigint PK</td><td></td></tr>
+            <tr><td><code>notifiable_type</code></td><td>string</td><td>Polymorphic type</td></tr>
+            <tr><td><code>notifiable_id</code></td><td>bigint</td><td>Polymorphic ID</td></tr>
+            <tr><td><code>category</code></td><td>string</td><td>Category key</td></tr>
+            <tr><td><code>frequency</code></td><td>string</td><td><code>daily</code> | <code>weekly</code></td></tr>
+            <tr><td><code>type</code></td><td>string</td><td>Item type identifier (e.g. <code>order_shipped</code>)</td></tr>
+            <tr><td><code>payload</code></td><td>json</td><td>Serialized <code>MailMessage</code> data</td></tr>
+            <tr><td><code>created_at</code></td><td>timestamp</td><td></td></tr>
+            <tr><td><code>updated_at</code></td><td>timestamp</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- Routes Reference -->
+    <section id="routes-reference">
+      <h2>Routes Reference</h2>
+      <p>All package routes are registered under the <code>web</code> middleware group and protected by Laravel's signed URL verification.</p>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Method</th><th>URI</th><th>Route Name</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><span class="method method-get">GET</span></td>
+              <td><code>/email-preferences</code></td>
+              <td><code>email-preferences.center</code></td>
+              <td>Preference center — show all categories</td>
+            </tr>
+            <tr>
+              <td><span class="method method-post">POST</span></td>
+              <td><code>/email-preferences</code></td>
+              <td><code>email-preferences.center.save</code></td>
+              <td>Save updated preferences</td>
+            </tr>
+            <tr>
+              <td><span class="method method-get">GET</span></td>
+              <td><code>/email-preferences/unsubscribe</code></td>
+              <td><code>email-preferences.unsubscribe</code></td>
+              <td>Unsubscribe confirmation page</td>
+            </tr>
+            <tr>
+              <td><span class="method method-post">POST</span></td>
+              <td><code>/email-preferences/unsubscribe</code></td>
+              <td><code>email-preferences.unsubscribe.post</code></td>
+              <td>RFC 8058 one-click unsubscribe endpoint</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout callout-info">
+        All routes require a valid Laravel signed URL signature. Requests without a valid signature receive a <code>403</code> response.
+      </div>
+    </section>
+
+    <footer class="page-footer">
+      <p>Laravel Email Preference Center &mdash; MIT License</p>
+      <p>Built for Laravel 10+ &middot; PHP 8.1+</p>
+    </footer>
+
+  </main>
+</div>
+
+<script src="/docs/script.js"></script>
+</body>
+</html>

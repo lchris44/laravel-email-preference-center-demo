@@ -4,7 +4,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DemoActionController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/', fn () => response()->file(public_path('docs/index.html')))->name('docs');
+Route::get('/demo', [DashboardController::class, 'index'])->name('dashboard');
 
 // Notifications
 Route::post('/demo/notify/marketing',  [DemoActionController::class, 'notifyMarketing'])->name('demo.notify.marketing');
