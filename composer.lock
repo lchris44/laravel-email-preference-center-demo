@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c24399723e81c3461e2eb01768e154d4",
+    "content-hash": "4cc26d420d7046a4a6f3360916cdafac",
     "packages": [
         {
             "name": "brick/math",
@@ -1463,24 +1463,24 @@
         },
         {
             "name": "lchris44/laravel-email-preference-center",
-            "version": "v1.2.1",
+            "version": "v1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lchris44/laravel-email-preference-center.git",
-                "reference": "d8b6ca4f1eaeb66a74951e1c067a3ff570963af7"
+                "reference": "81ed16ce3121f28bdd15758a6bd3b761311f4ced"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lchris44/laravel-email-preference-center/zipball/d8b6ca4f1eaeb66a74951e1c067a3ff570963af7",
-                "reference": "d8b6ca4f1eaeb66a74951e1c067a3ff570963af7",
+                "url": "https://api.github.com/repos/lchris44/laravel-email-preference-center/zipball/81ed16ce3121f28bdd15758a6bd3b761311f4ced",
+                "reference": "81ed16ce3121f28bdd15758a6bd3b761311f4ced",
                 "shasum": ""
             },
             "require": {
-                "illuminate/contracts": "^10.0|^11.0|^12.0",
+                "illuminate/contracts": "^10.0|^11.0|^12.0|^13.0",
                 "php": "^8.2"
             },
             "require-dev": {
-                "orchestra/testbench": "^8.0|^9.0|^10.0",
+                "orchestra/testbench": "^8.0|^9.0|^10.0|^11.0",
                 "phpunit/phpunit": "^10.0|^11.0"
             },
             "type": "library",
@@ -1523,9 +1523,9 @@
             ],
             "support": {
                 "issues": "https://github.com/lchris44/laravel-email-preference-center/issues",
-                "source": "https://github.com/lchris44/laravel-email-preference-center/tree/v1.2.1"
+                "source": "https://github.com/lchris44/laravel-email-preference-center/tree/v1.3.0"
             },
-            "time": "2026-03-15T21:41:36+00:00"
+            "time": "2026-03-18T12:12:44+00:00"
         },
         {
             "name": "league/commonmark",
